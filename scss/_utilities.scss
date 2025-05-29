@@ -1,0 +1,349 @@
+@use "sass:meta";
+@use 'variables' as *;
+@use 'mixins' as *;
+// utilities file
+// Position utilities
+$positions: static, relative, absolute, fixed, sticky;
+@each $pos in $positions {
+  .position-#{$pos} { position: $pos; }
+}
+
+// Display
+@include responsive-classes($displays, 'd-', '', display);
+
+// Flex direction
+@include responsive-classes($flex-directions, 'flex-', '', flex-direction);
+
+// Flex wrap
+@each $class, $value in $flex-wraps {
+  .#{$class} { flex-wrap: $value; }
+}
+
+// Align items
+@each $class, $value in $align-items {
+  .#{$class} { align-items: $value; }
+}
+
+// Justify content
+@each $class, $value in $justify-content {
+  .#{$class} { justify-content: $value; }
+}
+
+// Align self
+@each $class, $value in $align-self {
+  .#{$class} { align-self: $value; }
+}
+
+// Text align
+@each $class, $value in $text-aligns {
+  .#{$class} { text-align: $value; }
+}
+
+// borders
+
+// borders width
+@each $key, $val in $border-widths {
+  .border-#{$key} {
+    border-width: $val !important;
+  }
+
+  .border-top-#{$key} {
+    border-top-width: $val !important;
+  }
+
+  .border-right-#{$key} {
+    border-right-width: $val !important;
+  }
+
+  .border-bottom-#{$key} {
+    border-bottom-width: $val !important;
+  }
+
+  .border-left-#{$key} {
+    border-left-width: $val !important;
+  }
+}
+
+// borders style
+@each $key, $val in $border-styles {
+  .border-#{$key} {
+    border-style: $val !important;
+  }
+
+  .border-top-#{$key} {
+    border-top-style: $val !important;
+  }
+
+  .border-right-#{$key} {
+    border-right-style: $val !important;
+  }
+
+  .border-bottom-#{$key} {
+    border-bottom-style: $val !important;
+  }
+
+  .border-left-#{$key} {
+    border-left-style: $val !important;
+  }
+}
+
+// borders color
+@each $name, $value in $border-colors {
+  .border-#{$name} {
+    border-color: $value !important;
+  }
+
+  .border-top-#{$name} {
+    border-top-color: $value !important;
+  }
+
+  .border-right-#{$name} {
+    border-right-color: $value !important;
+  }
+
+  .border-bottom-#{$name} {
+    border-bottom-color: $value !important;
+  }
+
+  .border-left-#{$name} {
+    border-left-color: $value !important;
+  }
+}
+
+// Ajout de la classe border-none
+.border-none {
+  border-width: 0 !important;
+}
+
+.border-top-none {
+  border-top-width: 0 !important;
+}
+
+.border-right-none {
+  border-right-width: 0 !important;
+}
+
+.border-bottom-none {
+  border-bottom-width: 0 !important;
+}
+
+.border-left-none {
+  border-left-width: 0 !important;
+}
+// // Border style
+// @include responsive-classes($border-styles, '', '', border-style);
+
+// // Border width
+// @include responsive-classes($border-widths, 'border-', '', border-width);
+
+// Utilisation de l'extension de border-radius déjà existante
+@each $class, $value in $radius {
+  .#{$class} { border-radius: $value; }
+}
+
+// Opacity
+@each $key, $value in $opacity-values {
+  .opacity-#{$key} {
+    opacity: $value !important;
+  }
+}
+
+// Visibility
+@each $value in $visibility-values {
+  .visibility-#{$value} {
+    visibility: $value !important;
+  }
+}
+
+// Z-Index
+@include responsive-classes($z-index-values, 'z-', '', z-index);
+
+// Text decoration
+@include responsive-classes($text-decorations, '', '', text-decoration);
+
+// Text transform
+@include responsive-classes($text-transforms, '', '', text-transform);
+
+// Font style
+@include responsive-classes($font-styles, '', '', font-style);
+
+// letter-spacing
+@include responsive-classes($letter-spacing, 'ls-', '', letter-spacing);
+
+// Génération des classes CSS correspondantes
+@include responsive-classes($filters, '', '', filter);
+
+// Génération des classes 
+@include responsive-classes($object-fits, '', '', object-fit);
+
+@include responsive-classes($object-positions, '', '', object-position);
+@include responsive-classes($image-renderings, '', '', image-rendering);
+
+// Aspect ratio
+@include responsive-classes($aspect-ratios, '', '', aspect-ratio);
+
+// Bg size
+@include responsive-classes($bg-sizes, '', '', background-size);
+
+// Bg positions
+@include responsive-classes($bg-positions, '', '', background-position);
+
+// Bg positions
+@include responsive-classes($mix-blend-modes, '', '', background-blend-mode);
+
+// Bg mix blend
+@include responsive-classes($mix-blend-modes, '', '', mix-blend-mode);
+
+// Bg blend mode
+@include responsive-classes($bg-blend-modes, '', '', background-blend-mode);
+
+// Line height
+@include responsive-classes($line-heights, '', '', line-height);
+
+// Font sizes
+@each $key, $value in $font-sizes {
+  .#{$key} {
+    font-size: $value;
+  }
+}
+
+// Font weights
+@each $key, $value in $font-weights {
+  .#{$key} {
+    font-weight: $value;
+  }
+}
+
+// Box Shadows
+@include responsive-classes($shadows, '', '', box-shadow);
+
+// Text Shadows
+@include responsive-classes($text-shadows, '', '', text-shadow);
+
+// Positions
+@each $pos in $coordpositions {
+  
+  @include responsive-classes($position-values, #{$pos}-, '', $pos);
+
+}
+
+// Width / Height
+@include responsive-classes($size-utilities, 'w-', '', width);
+@include responsive-classes($size-utilities, 'min-w-', '', min-width);
+@include responsive-classes($size-utilities, 'max-w-', '', max-width);
+@include responsive-classes($size-utilities, 'h-', '', height);
+@include responsive-classes($size-utilities, 'min-h-', '', min-height);
+@include responsive-classes($size-utilities, 'max-h-', '', max-height);
+// @each $key, $val in $size-utilities {
+//   .w-#{$key} { width: $val; }
+//   .h-#{$key} { height: $val; }
+// }
+
+// Margin / Padding / Gap
+@include responsive-classes($spacers, 'gap-', '', gap);
+// Directions pour margin et padding
+$directions: (
+  '': '',         // tous les côtés (ex: .m-1)
+  't': 'top',    // top
+  'b': 'bottom', // bottom
+  'l': 'left',   // start (ou left en LTR)
+  'r': 'right',  // end (ou right en LTR)
+  'h': ('left', 'right'), // horizontal
+  'v': ('top', 'bottom')  // vertical
+);
+
+@each $key, $val in $spacers {
+  @each $abbr, $dir in $directions {
+
+    // Margin
+    @if meta.type-of($dir) == 'list' {
+      .m#{$abbr}-#{$key} {
+        @each $d in $dir {
+          margin-#{$d}: $val !important;
+        }
+      }
+    } @else if $dir != '' {
+      .m#{$abbr}-#{$key} {
+        margin-#{$dir}: $val !important;
+      }
+    } @else {
+      .m#{$abbr}-#{$key} {
+        margin: $val !important;
+      }
+    }
+
+    // Padding
+    @if meta.type-of($dir) == 'list' {
+      .p#{$abbr}-#{$key} {
+        @each $d in $dir {
+          padding-#{$d}: $val !important;
+        }
+      }
+    } @else if $dir != '' {
+      .p#{$abbr}-#{$key} {
+        padding-#{$dir}: $val !important;
+      }
+    } @else {
+      .p#{$abbr}-#{$key} {
+        padding: $val !important;
+      }
+    }
+  
+  }
+}
+
+
+// Overflow
+@each $ovf in (auto, hidden, visible, scroll) {
+  .overflow-#{$ovf} { overflow: $ovf; }
+  .overflow-x-#{$ovf} { overflow-x: $ovf; }
+  .overflow-y-#{$ovf} { overflow-y: $ovf; }
+}
+
+// Cursor
+@each $class, $val in $cursors {
+  .#{$class} { cursor: $val; }
+}
+
+// Border radius
+@each $class, $val in $radius {
+  .#{$class} { border-radius: $val; }
+}
+
+// Colors
+@each $name, $val in $colors {
+  .color-#{"" + $name} { color: $val; }
+  .bg-#{"" + $name} { background-color: $val; }
+}
+
+// Text overflow
+.ellipis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+}
+.no-wrap {
+  white-space: nowrap;
+  text-wrap: nowrap;
+}
+.ellipis-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: pre;
+  word-break: break-word;
+  text-wrap: wrap;
+  text-overflow: ellipsis;
+}
+.no-wrap {
+  white-space: nowrap;
+}
+
+// Utilities
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

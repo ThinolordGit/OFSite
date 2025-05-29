@@ -1,0 +1,231 @@
+.gift-airdrop {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    width: 100%;
+    max-width: 650px;
+    transform: translateX(-50%) translateY(-50%);
+    padding: 10px 1.4em;
+    background: linear-gradient(90deg, var(--color-2-transparent) 0%, var(--color-3-transparent) 50%, var(--color-2-transparent) 100%);
+    backdrop-filter: blur(3em);
+    color: white;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.1rem;
+    border-radius: .8em;
+    display: flex;
+    flex-direction: column;
+    z-index: 9999;
+    opacity: 0;
+    transition: top 5s, left 5s, transform 0.5s cubic-bezier(0.75, -0.5, 0.2, 1.75),opacity 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Transition pour déplacer et transformer */
+    perspective: 1000px; /* Perspective 3D */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Ombre portée pour donner l'illusion de flottement */
+    overflow: hidden;
+    gap: .25em;
+}
+
+
+.gift-airdrop.mounted {
+  /* transform: translate(-50%,0); */
+  animation: toastPopIn 0.6s forwards;
+  opacity: 1;
+}
+
+/* Keyframes avec double rebond inversé */
+@keyframes toastPopIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px); /* commence bas */
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(10px); /* commence bas */
+  }
+  40% {
+    transform: translateX(-50%) translateY(-8px); /* dépasse vers le haut */
+  }
+  70% {
+    transform: translateX(-50%) translateY(0);  /* rebond bas */
+  }
+  
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+@keyframes toastPopInV {
+  0% {
+    opacity: 0;
+    transform: translateY(-200%); /* commence bas */
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(10px); /* commence bas */
+  }
+  40% {
+    transform: translateY(-8px); /* dépasse vers le haut */
+  }
+  70% {
+    transform: translateY(0);  /* rebond bas */
+  }
+  
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gift-airdrop::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 10%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(220, 170, 247, 0.4) 0%, rgba(166, 243, 213, 0.05) 100%);
+    transform: skewX(-20deg);
+    transition: left 0.7s cubic-bezier(.4,2,.6,1);
+    z-index: 99999;
+    pointer-events: none;
+    animation: btn-glow 2s linear infinite;
+}
+.gift-airdrop::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 10%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(220, 170, 247, 0.4) 0%, rgba(166, 243, 213, 0.05) 100%);
+    transform: skewX(-20deg);
+    transition: left 0.7s cubic-bezier(.4,2,.6,1);
+    z-index: 99999;
+    pointer-events: none;
+    animation: btn-glow 2s linear infinite;
+    animation-delay: .2s;
+}
+
+.gift-airdrop .emoji {
+    font-size: 1.5rem;
+    animation: zoom-shake 1.5s infinite; /* Ajout de l'animation shake */
+    margin-right: 10px;
+    transform-origin: center;
+}
+
+.zoom-shake {
+  animation: zoom-shake 1.5s infinite; /* Ajout de l'animation shake */
+  transform-origin: center;
+}
+
+.gift-airdrop .title {
+  position: relative;
+  justify-content: center;
+  left: 0;
+  transform: translateX(0);
+  transition: all .6s ease;
+}
+.gift-airdrop .sub {
+  position: relative;
+  justify-content: center;
+  left: 0;
+  transform: translateX(0%);
+  transition-delay: .1s;
+  transition: all .6s ease;
+}
+.gift-airdrop .ceptacle {
+  transition: all .2s ease;
+  /* overflow: hidden; */
+}
+.gift-airdrop .ceptacle button {
+  animation-delay: .4s;
+  opacity: 0;
+}
+
+.gift-airdrop.sticked .ceptacle {
+  width: 25%;
+}
+.gift-airdrop.sticked .ceptacle button {
+  animation-delay: 2s;
+  animation: toastPopInV 1s forwards;
+}
+.gift-airdrop.sticked .title,.gift-airdrop.sticked .sub {
+  justify-content: start !important;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.gift-airdrop .message {
+    display: flex;
+    align-items: center;
+}
+
+.countdown {
+    font-weight: bold;
+    font-size: 1.5em;
+    background: linear-gradient(90deg, var(--color-accent1) 0%, var(--color-accent2) 50%, var(--color-accent3) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Barre de progression */
+.progress-container {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #4299ef 0%, var(--color-accent3) 100%);
+  border-radius: 3px;
+  transition: width 1s ease-in-out;
+}
+
+
+/* Animation de pulsation */
+@keyframes zoom-shake {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.2) rotate(0deg); /* Augmenter la taille */
+  }
+  53% {
+    transform: scale(1.2) rotate(-10deg); /* Augmenter la taille */
+  }
+  61% {
+    transform: scale(1.2) rotate(10deg); /* Augmenter la taille */
+  }
+  69% {
+    transform: scale(1.2) rotate(-10deg); /* Augmenter la taille */
+  }
+  71% {
+    transform: scale(1.2) rotate(0deg); /* Augmenter la taille */
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Effet de rotation 3D et flottement */
+/* .gift-airdrop:hover {
+  transform: scale(1); 
+} */
+
+.sparkle.minus {
+    font-size: 4px !important;
+}
+
+/* Étincelles au bout de la barre de progression */
+.progress-bar.sparkling {
+  position: relative;
+  overflow: visible;
+}
+
+.progress-bar.sparkling .sparkle {
+  animation: sparkle-move 0.7s ease-out infinite;
+}

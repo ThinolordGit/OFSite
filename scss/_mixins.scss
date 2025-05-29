@@ -1,0 +1,24 @@
+@use 'variables' as *;
+
+@mixin responsive-classes($map, $property-prefix: '', $property-suffix: '', $css-prop) {
+  @each $class, $value in $map {
+    .#{$property-prefix}#{$class}#{$property-suffix} {
+      #{$css-prop}: $value;
+    }
+    
+    @each $break, $bp in $breakpoints {
+      @media (min-width: #{$bp}) {
+        .#{$break}-#{$property-prefix}#{$class}#{$property-suffix} {
+          #{$css-prop}: $value !important;
+        }
+      }
+    }
+  }
+}
+@mixin extend-classes($map, $property-prefix: '', $property-suffix: '', $css-prop) {
+  @each $class, $value in $map {
+    .#{$property-prefix}#{$class}#{$property-suffix} {
+      #{$css-prop}: $value;
+    }
+  }
+}
