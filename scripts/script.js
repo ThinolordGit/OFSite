@@ -149,7 +149,7 @@ whenReady(() => {
     window.addEventListener('scroll', () => {
         if (window.scrollY > seuil) {
             // Action à faire une fois le seuil dépassé
-            console.log('Scroll > 300px',window.scrollY);
+            // console.log('Scroll > 300px',window.scrollY);
             // Par exemple, ajouter une classe à un élément :
             if (!Qs("gift-airdrop").containsClass('sticked')) {
                 Qs("gift-airdrop").addClass('sticked');
@@ -191,7 +191,9 @@ whenReady(() => {
     }, 7000);
     
     Qst("tl-touchable-icon","click",tlpop)
-    Qs("#tl-pop","click",tlpop)
+    Qs("#tl-pop","click",async (e,ev) => {
+        if (ev.target === e) await tlpop();
+    })
 
     // --- SPARKLE EFFECT ---
     async function createPgSparkle(target,n) {
@@ -251,15 +253,17 @@ whenReady(() => {
 
     // Fonction de mise à jour du compte à rebours
     function updateCountdown() {
+        timeLeft--; // Réduire le temps restant
+        if (timeLeft <= 0) {
+            timeLeft=0;
+        }
         QsForeach('.countdown',(countdownElement) => {
             countdownElement.textContent = formatTime(timeLeft);
-            timeLeft--; // Réduire le temps restant
-            
             // Si le temps est écoulé, arrêter le compte à rebours
-            if (timeLeft < 0) {
+            if (timeLeft <= 0) {
                 clearInterval(countdownInterval);
             }
-        })
+        });
     }
 
     // Fonction pour afficher le format du temps
@@ -279,14 +283,14 @@ whenReady(() => {
         startProgressBar();
     }, 5000);
     // Function to move the airdrop element randomly
-    function moveAirdrop() {
-        const screenWidth = window.innerWidth;
-        const screenHeight = window.innerHeight;
-        const x = Math.random() * (screenWidth - airdrop.offsetWidth);
-        const y = Math.random() * (screenHeight - airdrop.offsetHeight);
-        airdrop.style.left = `${x}px`;
-        airdrop.style.top = `${y}px`;
-    }
+    // function moveAirdrop() {
+    //     const screenWidth = window.innerWidth;
+    //     const screenHeight = window.innerHeight;
+    //     const x = Math.random() * (screenWidth - airdrop.offsetWidth);
+    //     const y = Math.random() * (screenHeight - airdrop.offsetHeight);
+    //     airdrop.style.left = `${x}px`;
+    //     airdrop.style.top = `${y}px`;
+    // }
     // Move the airdrop every 3 seconds
     // setInterval(moveAirdrop, 5000);
     
@@ -317,7 +321,7 @@ whenReady(() => {
         "squad92", "street", "city", "urbn", "xpress", "wolf", "panth", "luffy", "mad", "crazy",
         "nxt", "neo", "v2", "rev", "fury", "rush"
     ];
-
+    
 
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -547,6 +551,11 @@ whenReady(() => {
             await tlpop();
         })
     }, 1000);
+
+    Qst("*[tl-href]","click",function (e,ev) {
+        const destination = e.getTlaction("href");
+        window.location.href = destination;
+    })
     
     document.addEventListener('click', () => {
         if (!notifSoundReady) {

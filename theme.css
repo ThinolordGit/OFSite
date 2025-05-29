@@ -4,10 +4,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    
 }
 *::before, *::after {
     box-sizing: border-box;
 }
+
 /* === Variables couleurs principales === */
 :root {
     --color-1-transparent: #40e9cd1b;
@@ -583,7 +585,7 @@ h1, h2 {
     align-items: center;
     width: 100%;
     padding: 1em 0.8em;
-    gap: 2em;
+    gap: 1em;
     font-size: 0.9em;
 }
 
